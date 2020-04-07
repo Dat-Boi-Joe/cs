@@ -1,0 +1,96 @@
+'''
+Importing module:
+'''
+
+from random import *
+from math import *
+
+print(randint(1,10))
+print(pi)
+
+'''
+Functions
+'''
+
+
+def hello():
+    return 'Hello there'
+print(hello())
+
+
+def personal_greeting(a):
+    print('Hello there ' + str(a))
+
+
+name = input('What is your name: ')
+personal_greeting(name)
+
+def area(l,w):
+    print('The are of your rectangle is ' + str(l*w))
+
+
+numberOfRectangles = int(input('How many rectangles: '))
+count = 0
+while count < numberOfRectangles:
+    len = input('Length of rectangle #'+str(count+1)+' :')
+    wid = input('Width of rectangle #'+str(count+1)+' :')
+    area(int(len), int(wid))
+    count += 1
+
+
+
+
+'''
+Functions pt 2
+'''
+
+def radiusFinder(d):
+    return (d/2)
+
+radius1 = radiusFinder(22)
+radius2 = radiusFinder(40)
+
+area1= pi *radius1**2
+area2 = pi * radius2**2
+
+print(area1)
+print(area2)
+
+def radiusFinder(d):
+    r = d/2
+    return r
+
+def areacirc(r):
+    area= pi *r**2
+    return area
+
+circlenum = int(input('How many circles? '))
+
+for i in range(circlenum):
+    d = float(input('Enter the diameter of circle #'+str(i+1) + ' :'))
+    r = radiusFinder(d)
+    area = areacirc(r)
+
+    print('The radius of Circle #{0} is {1}'.format(str(i+1),str(r)))
+    print('The area of your circle #{0} is {1}'.format(str(i+1),str(area)))
+    print('')
+
+
+from random import *
+
+def answer(number):
+    if number == 1:
+        return "It is certain."
+    elif number == 2:
+        return 'Yes'
+    elif number == 3:
+        return "No"
+    elif number == 4:
+        return 'Reply is hazy. Try again'
+    elif number == 5:
+        return 'Its not looking good'
+
+
+userinput = input('Enter your question? ')
+r = randint(1,5)
+print(answer(r))
