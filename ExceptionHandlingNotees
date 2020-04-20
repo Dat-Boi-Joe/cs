@@ -1,0 +1,30 @@
+def divide(num1, num2):
+    return num1 / num2
+
+
+while True:
+    try:
+        number1 = float(input('Enter a number: '))
+        number2 = float(input('Enter a number: '))
+        try:
+            answer = divide(number1, number2)
+            print("I will now divide these 2 numbers")
+            print('{0} / {1} = {2}'.format(number1, number2, answer))
+            break
+        except:
+            print('Error cannot divide by 0')
+    except:
+        print('You did not enter valid numbers.')
+
+
+while True:
+    try:
+        packets = int(input('How many ketchup packets do you want? '))
+        if packets < 0:
+            print('You can not order a negative amount of packets.')
+        else:
+            break
+    except:
+        print('Please enter a whole number.')
+
+print("You ordered " + str(packets) + ' ketchup packets.')
