@@ -5,51 +5,44 @@
 
 
 import numpy  # import module for arrays
+
 import random  # import module for random integers
-
-width = 33  # variable to menu width
-
-print("Welcome to Joe and Danny's Restaurant")
-print('')
-orderNumber = random.randint(0, 100)  # generate random order number
-subTotal = 0.00
-
-sandwichMenu = numpy.array([[1, 'Chicken', 5.25],
-                            [2, 'Beef', 6.25],
-                            [3, 'Fish', 6.75]])  # established sandwich prices
-
-friesMenu = numpy.array([[1, 'Small', 1.00],
-                         [2, 'Medium', 1.50],
-                         [3, 'Large', 2.00]])  # established fries prices
-
-drinkMenu = numpy.array([[1, 'Small', 1.00],
-                         [2, 'Medium', 1.75],
-                         [3, 'Large', 2.25]])  # established drink prices
 
 
 def sandwichCost(sandwichChoice):
-    return subTotal + float(sandwichMenu[sandwichChoice - 1][2])  # function to obtain sandwich prices
+    return subTotal + float(sandwichMenu[sandwichChoice][2])  # function to obtain sandwich prices
 
 
-def frieshCost(friesChoice):
-    return subTotal + float(friesMenu[friesChoice - 1][2])  # function to obtain fries prices
+def friesCost(friesChoice):
+    return subTotal + float(friesMenu[friesChoice][2])  # function to obtain fries prices
 
 
 def drinkCost(drinkChoice):
-    return subTotal + float(drinkMenu[drinkChoice - 1][2])  # function to obtain drink prices
+    return subTotal + float(drinkMenu[drinkChoice][2])  # function to obtain drink prices
 
 
 def invalidInput():
-    print('You entered an invalid item number.')
-    print('Please enter a valid item number.''\n')
+    print('You entered an invalid input.')
+    print('Please enter a valid valid.''\n')
 
 
-print('Sandwiches')
-for i in range(0, 3):
+sandwichMenu = numpy.array([[0, '-No Sandwich-', 0.00], [1, 'Chicken', 5.25], [2, 'Beef', 6.25],
+                            [3, 'Fish', 6.75]])  # established sandwich prices
+friesMenu = numpy.array(
+    [[0, '-No Fries-', 0.00], [1, 'Small', 1.00], [2, 'Medium', 1.50], [3, 'Large', 2.00]])  # established fries prices
+drinkMenu = numpy.array(
+    [[0, '-No Drink-', 0.00], [1, 'Small', 1.00], [2, 'Medium', 1.75], [3, 'Large', 2.25]])  # established drink prices
+customerOrder = numpy.array([[0, 0, ]])
+orderNumber = random.randint(0, 100)  # generate random order number
+subTotal = 0.00  # intialize variable
+ketchupNum = 0  # intialize variable
+width = 54  # variable to menu width
+print("Welcome to Joe and Danny's Restaurant")
+print('Select A Sandwich')
+for i in range(0, 4):
     print((str(sandwichMenu[i][0])) + ') ' + (sandwichMenu[i][1]) + ' ' * (width - 8 - len(sandwichMenu[i][1])) + (
-        str(sandwichMenu[i][2])))
+                "%.2f" % float(sandwichMenu[i][2])))
 print('-' * width)  # print sandwich menu
-
 while True:
     sandwichChoice = (input('Enter the item number: '))
     if (sandwichChoice.isdecimal()) == False:
@@ -58,18 +51,15 @@ while True:
     else:
         sandwichChoice = int(sandwichChoice)
     try:
-        if ((sandwichMenu[sandwichChoice - 1][2]).isdigit()) == False:
+        if ((sandwichMenu[sandwichChoice][2]).isdigit()) == False:
             break
     except:
         invalidInput()  # collect user input on sandwich
-print('\n')
-
-print('Fries')
-for i in range(0, 3):
+print('\n''Select A Fries Size')
+for i in range(0, 4):
     print((str(friesMenu[i][0])) + ') ' + (friesMenu[i][1]) + ' ' * (width - 8 - len(friesMenu[i][1])) + (
-        str(friesMenu[i][2])))
-print('-' * width)  # print fries menu
-
+                "%.2f" % float(friesMenu[i][2])))
+print('-' * width)  # print drink menu
 while True:
     friesChoice = (input('Enter the item number: '))
     if (friesChoice.isdecimal()) == False:
@@ -78,35 +68,26 @@ while True:
     else:
         friesChoice = int(friesChoice)
     try:
-        if ((friesMenu[friesChoice - 1][2]).isdigit()) == False:
+        if ((friesMenu[friesChoice][2]).isdigit()) == False:
             break
     except:
-        invalidInput()  # collect user input on fries
-
-if friesChoice == 1:
-    while True:
-        super = input('Would you like to supersize? \n 1 = yes \n 2 = no \n')
-        if super.isdecimal() == False:
-            invalidInput()
-            continue
-        else:
-            super = int(super)
-        try:
-            if super == 1 or super == 2:
-                break
-        except:
-            invalidInput()
-if super == 1:
-    friesChoice = 3  # asks user if they would like to super size
-
-print('\n')
-
-print('Drinks')
-for i in range(0, 3):
+        invalidInput()  # collects user input on drink
+while friesChoice == 1:
+    print('\n''Would you like to supersize your fries for 2x the price?')
+    print("Enter 'Yes' or 'No'")
+    super = (input()).capitalize()
+    if super.lower() == 'yes':
+        friesChoice = 3
+        break
+    elif super.lower() == 'no':
+        break
+    else:
+        continue  # collect supersize choice
+print('\n''Select A Cup Size')
+for i in range(0, 4):
     print((str(drinkMenu[i][0])) + ') ' + (drinkMenu[i][1]) + ' ' * (width - 8 - len(drinkMenu[i][1])) + (
-        str(drinkMenu[i][2])))
+                "%.2f" % float(drinkMenu[i][2])))
 print('-' * width)  # print drink menu
-
 while True:
     drinkChoice = (input('Enter the item number: '))
     if (drinkChoice.isdecimal()) == False:
@@ -115,17 +96,64 @@ while True:
     else:
         drinkChoice = int(drinkChoice)
     try:
-        if ((drinkMenu[drinkChoice - 1][2]).isdigit()) == False:
+        if ((drinkMenu[drinkChoice][2]).isdigit()) == False:
             break
     except:
         invalidInput()  # collects user input on drink
-print('\n')
-
-subTotal = sandwichCost(sandwichChoice) + drinkCost(drinkChoice) + frieshCost(friesChoice)  # adds selected choices
-
-print('\n''Subtotal:' + ' ' * (width - 14) + '$' + str(round((subTotal), 2)))
-combo = subTotal - 1
-print('Combo discount -$1.00')
-print(' ' * (width - 5) + '$' + str(combo))
-print('Tax:' + ' ' * (width - 9) + '$' + str(round((combo * 0.07), 2)))
-print('Total:' + ' ' * (width - 11) + '$' + str(round((combo * 1.07), 2)))  # print price info
+while True:
+    print('\n''Select an amount of ketchup packets')
+    print('Each ketchup packet costs $0.25')
+    ketchupNum = (input('Enter a number: '))
+    if ketchupNum.isdigit() == False:
+        invalidInput()
+        continue
+    if int(ketchupNum) >= 0:
+        ketchupNum = int(ketchupNum)
+        break  # collect ammount go ketchup packects
+subTotal = sandwichCost(sandwichChoice) + drinkCost(drinkChoice) + friesCost(friesChoice) + (
+            ketchupNum * 0.25)  # adds selected choices
+print('-' * width)  # formatting
+print('\n')  # formatting
+print(' ' * (18) + 'Order Number: ' + str(orderNumber))  # print reciept info
+print(' ' * (21) + 'You ordered''\n')  # print reciept info
+if 0 < sandwichChoice:
+    print(sandwichMenu[sandwichChoice][1] + ' Sandwich' + ' (1 @ ' + "%.2f" % float(
+        (sandwichMenu[sandwichChoice][2])) + ')' + ' ' * (
+                      width - 25 - len(sandwichMenu[sandwichChoice][1])) + '$' + "%.2f" % float(
+        (sandwichMenu[sandwichChoice][2])))  # print reciept info
+if 0 < friesChoice:
+    print(friesMenu[friesChoice][1] + ' Fries' + ' (1 @ ' + "%.2f" % float((friesMenu[friesChoice][2])) + ')' + ' ' * (
+                width - 22 - len(friesMenu[friesChoice][1])) + '$' + "%.2f" % float(
+        (friesMenu[friesChoice][2])))  # print reciept info
+if 0 < drinkChoice:
+    print(drinkMenu[drinkChoice][1] + ' Drink' + ' (1 @ ' + "%.2f" % float((drinkMenu[drinkChoice][2])) + ')' + ' ' * (
+                width - 22 - len(drinkMenu[drinkChoice][1])) + '$' + "%.2f" % float(
+        (drinkMenu[drinkChoice][2])))  # print reciept info
+if 0 < ketchupNum:
+    print('Ketchup Packets' + ' (' + str(ketchupNum) + ' @ 0.25)' + ' ' * (
+                width - 5 - len('Ketchup Packets' + ' (' + str(ketchupNum) + ' @ 0.25)')) + '$' + "%.2f" % (
+                      ketchupNum * 0.25))  # print reciept info
+if (0 < sandwichChoice) and (0 < friesChoice) and (0 < drinkChoice):
+    print('\n''Combo Discount' + ' ' * (width - 20) + '-$1.00')  # check eligiblity for coupon
+    subTotal = subTotal - 1
+print('-' * width)  # formatting
+print('Subtotal:' + ' ' * (width - 14) + '$' + "%.2f" % (round((subTotal), 2)))  # print price info
+print('Tax:' + ' ' * (width - 9) + '$' + "%.2f" % (round((subTotal * 0.07), 2)))  # print price info
+print('Total:' + ' ' * (width - 11) + '$' + "%.2f" % (round((subTotal * 1.07), 2)))  # print price info
+print('-' * width)  # formatting
+print('\n''How much will you be paying?')
+while True:
+    amountTenured = (input('$'))
+    if (amountTenured).isdecimal() == False:
+        invalidInput()
+        continue
+    if (subTotal * 1.07) > float(amountTenured):
+        print('This is not enough to cover your meal.')
+        print('You need to enter a greater amount''\n')
+        continue
+    else:
+        break  # collect user input for amount paying
+print(
+    '\n''Amount Tenured:' + ' ' * (width - 20) + '$' + "%.2f" % (round(float(amountTenured), 2)))  # print amount given
+print('Change:' + ' ' * (width - 12) + '$' + "%.2f" % (
+    round((float(amountTenured) - (subTotal * 1.07)), 2)))  # print change
