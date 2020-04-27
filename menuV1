@@ -1,0 +1,131 @@
+# If you are getting an error go to the python terminal and enter these commands
+# curl -O https://bootstrap.pypa.io/get-pip.py
+# Then enter
+# python -m pip install --user numpy scipy matplotlib ipython jupyter pandas sympy nose
+
+
+import numpy  # import module for arrays
+import random  # import module for random integers
+
+width = 33  # variable to menu width
+
+print("Welcome to Joe and Danny's Restaurant")
+print('')
+orderNumber = random.randint(0, 100)  # generate random order number
+subTotal = 0.00
+
+sandwichMenu = numpy.array([[1, 'Chicken', 5.25],
+                            [2, 'Beef', 6.25],
+                            [3, 'Fish', 6.75]])  # established sandwich prices
+
+friesMenu = numpy.array([[1, 'Small', 1.00],
+                         [2, 'Medium', 1.50],
+                         [3, 'Large', 2.00]])  # established fries prices
+
+drinkMenu = numpy.array([[1, 'Small', 1.00],
+                         [2, 'Medium', 1.75],
+                         [3, 'Large', 2.25]])  # established drink prices
+
+
+def sandwichCost(sandwichChoice):
+    return subTotal + float(sandwichMenu[sandwichChoice - 1][2])  # function to obtain sandwich prices
+
+
+def frieshCost(friesChoice):
+    return subTotal + float(friesMenu[friesChoice - 1][2])  # function to obtain fries prices
+
+
+def drinkCost(drinkChoice):
+    return subTotal + float(drinkMenu[drinkChoice - 1][2])  # function to obtain drink prices
+
+
+def invalidInput():
+    print('You entered an invalid item number.')
+    print('Please enter a valid item number.''\n')
+
+
+print('Sandwiches')
+for i in range(0, 3):
+    print((str(sandwichMenu[i][0])) + ') ' + (sandwichMenu[i][1]) + ' ' * (width - 8 - len(sandwichMenu[i][1])) + (
+        str(sandwichMenu[i][2])))
+print('-' * width)  # print sandwich menu
+
+while True:
+    sandwichChoice = (input('Enter the item number: '))
+    if (sandwichChoice.isdecimal()) == False:
+        invalidInput()
+        continue
+    else:
+        sandwichChoice = int(sandwichChoice)
+    try:
+        if ((sandwichMenu[sandwichChoice - 1][2]).isdigit()) == False:
+            break
+    except:
+        invalidInput()  # collect user input on sandwich
+print('\n')
+
+print('Fries')
+for i in range(0, 3):
+    print((str(friesMenu[i][0])) + ') ' + (friesMenu[i][1]) + ' ' * (width - 8 - len(friesMenu[i][1])) + (
+        str(friesMenu[i][2])))
+print('-' * width)  # print fries menu
+
+while True:
+    friesChoice = (input('Enter the item number: '))
+    if (friesChoice.isdecimal()) == False:
+        invalidInput()
+        continue
+    else:
+        friesChoice = int(friesChoice)
+    try:
+        if ((friesMenu[friesChoice - 1][2]).isdigit()) == False:
+            break
+    except:
+        invalidInput()  # collect user input on fries
+
+if friesChoice == 1:
+    while True:
+        super = input('Would you like to supersize? \n 1 = yes \n 2 = no \n')
+        if super.isdecimal() == False:
+            invalidInput()
+            continue
+        else:
+            super = int(super)
+        try:
+            if super == 1 or super == 2:
+                break
+        except:
+            invalidInput()
+if super == 1:
+    friesChoice = 3  # asks user if they would like to super size
+
+print('\n')
+
+print('Drinks')
+for i in range(0, 3):
+    print((str(drinkMenu[i][0])) + ') ' + (drinkMenu[i][1]) + ' ' * (width - 8 - len(drinkMenu[i][1])) + (
+        str(drinkMenu[i][2])))
+print('-' * width)  # print drink menu
+
+while True:
+    drinkChoice = (input('Enter the item number: '))
+    if (drinkChoice.isdecimal()) == False:
+        invalidInput()
+        continue
+    else:
+        drinkChoice = int(drinkChoice)
+    try:
+        if ((drinkMenu[drinkChoice - 1][2]).isdigit()) == False:
+            break
+    except:
+        invalidInput()  # collects user input on drink
+print('\n')
+
+subTotal = sandwichCost(sandwichChoice) + drinkCost(drinkChoice) + frieshCost(friesChoice)  # adds selected choices
+
+print('\n''Subtotal:' + ' ' * (width - 14) + '$' + str(round((subTotal), 2)))
+combo = subTotal - 1
+print('Combo discount -$1.00')
+print(' ' * (width - 5) + '$' + str(combo))
+print('Tax:' + ' ' * (width - 9) + '$' + str(round((combo * 0.07), 2)))
+print('Total:' + ' ' * (width - 11) + '$' + str(round((combo * 1.07), 2)))  # print price info
