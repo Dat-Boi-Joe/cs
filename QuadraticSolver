@@ -1,0 +1,76 @@
+import math
+
+
+def invalad():
+    print('Please enter a number or decimal')
+
+
+def start():
+    print("Quadratic Equation solver V.1")
+    print('ax^2 + bx + c')
+
+
+def a():
+    while True:
+        try:
+            x = float(input('a = '))
+            if isinstance(x, float):
+                break
+            else:
+                print('ok')
+        except:
+            invalad()
+    return x
+
+
+def b():
+    while True:
+        try:
+            x = float(input('b = '))
+            if isinstance(x, float):
+                break
+            else:
+                print('ok')
+        except:
+            invalad()
+    return x
+
+
+def c():
+    while True:
+        try:
+            x = float(input('c = '))
+            if isinstance(x, float):
+                break
+            else:
+                print('ok')
+        except:
+            invalad()
+    return x
+
+
+def solution(a, b, c):
+    left = -b
+    right = b ** 2 - (4 * a * c)
+    bottom = 2 * a
+    if right <= 0:
+        unrealleft = left / bottom
+        unrealright = math.sqrt(right * -1) / bottom
+        print(unrealleft)
+        print(unrealright)
+        print('Your equation, {0}x^2 + {1}x + {2} '.format(a, b, c))
+        print('Has 2 unreal solutions')
+        print('{0} + {1}i and {0} - {1}i'.format(unrealleft, unrealright))
+    else:
+        pos = (left + math.sqrt(right)) / bottom
+        neg = (left - math.sqrt(right)) / bottom
+        print('Your equation, {0}x^2 + {1}x + {2} '.format(a, b, c))
+        print('Has 2 real solutions')
+        print(str(pos) + ' and ' + str(neg))
+
+
+start()
+a = a()
+b = b()
+c = c()
+solution(float(a), float(b), float(c))
