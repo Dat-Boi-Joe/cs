@@ -1,10 +1,9 @@
 import random
 
-def invalad():
-    print('Please enter a number')
 
 def start():
     print('Welcome to Guessing Game V2!')
+
 
 def difficulty():
     print('Please select your difficulty')
@@ -12,7 +11,7 @@ def difficulty():
     print('Medium (1-300 with 10 guesses)')
     print('Hard (1-500 with 5 guesses)`')
     while True:
-        x = input(': ').lower
+        x = input(': ').lower()
         if x == 'easy':
             print('You have selected Easy mode.')
             return x
@@ -25,53 +24,58 @@ def difficulty():
         else:
             print('Please select a valid difficulty.')
 
-def number_gen(difficulty):
-    if difficulty == 'easy':
-        number = random.randint(1,100)
+
+def number_gen(dif):
+    if dif == 'easy':
+        number = random.randint(1, 100)
         return number
-    elif difficulty == 'medium':
-        number = random.randint(1,300)
+    elif dif == 'medium':
+        number = random.randint(1, 300)
         return number
-    elif difficulty == 'hard':
-        number = random.randint(1,500)
+    elif dif == 'hard':
+        number = random.randint(1, 500)
         return number
+
+
 def tries(difficulty):
     if difficulty == 'easy':
-        tries = 15
-        return tries
+        t = 15
+        return t
     elif difficulty == 'medium':
-        tries = 10
-        return tries
+        t = 10
+        return t
     elif difficulty == 'hard':
-        tries = 5
-        return tries
+        t = 5
+        return t
 
 
 def errorProof():
     while True:
+        y = input(': ')
         try:
-            x = int(input('Guess: '))
-            break
+            x = int(y)
+            if isinstance(x, int):
+                break
         except:
-            invalad()
+            print('Please enter a whole number')
     return x
-
-
 
 
 start()
 dif = difficulty()
 num = number_gen(dif)
-i = tries(dif)
-while i > 1:
+i = int(tries(dif))
+while int(i) > 0:
     print('You have ' + str(i) + ' tries left')
-    input = errorProof()
-    if input == num:
+    z = errorProof()
+    if int(z) == int(num):
         print('Congrats you guessed the number!')
         break
-    elif input > num:
+    elif int(z) > int(num):
         print('Not quite, your number is too high')
-        i - 1
-    elif input < num:
+        i = i - 1
+    elif int(z) < int(num):
         print('Not quite, your number is too low')
-        i - 1
+        i = i - 1
+if int(i) == 0:
+    print("Sorry you could not guess the number.")
