@@ -1,0 +1,26 @@
+color1 = input('Enter primary color 1: ')
+color2 = input('Enter primary color 2: ')
+if color1 == 'red' or color1 == 'yellow' or color1 == 'blue':
+    if color1 == 'blue':
+        if color2 == 'red':
+            print('purple')
+        elif color2 == 'blue':
+            print('blue')
+        elif color2 == 'yellow':
+            print('green')
+    elif color1 == 'red':
+        if color2 == 'red':
+            print('red')
+        elif color2 == 'blue':
+            print('purple')
+        elif color2 == 'yellow':
+            print('orange')
+    elif color1 == 'yellow':
+        if color2 == 'red':
+            print('orange')
+        elif color2 == 'blue':
+            print('green')
+        elif color2 == 'yellow':
+            print('yellow')
+else:
+    print('You have entered an invalid color')
